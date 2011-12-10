@@ -8,7 +8,13 @@
 
 #import "EmployeeListViewController.h"
 
+#import "EmployeeViewController.h"
+
+#import "Employee.h"
+
 @implementation EmployeeListViewController
+
+@synthesize employees = _employees;
 
 - (void)dealloc {
     // @todo Release instance variables from properties
@@ -20,7 +26,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.employees = [Employee sampleListOfEmployees];
     self.title = NSLocalizedString(@"Company Directory", nil);
+    [self.tableView reloadData];
 }
 
 - (void)viewDidUnload {
@@ -50,7 +58,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0; // @todo Return a number of cells based on the employees array
+  return [self.employees count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -61,15 +69,25 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    // @todo Configure your table view cell for the corresponding employee
-    
+  
+
+    Employee *employee = [self.employees objectAtIndex:indexPath.row];
+    cell.textLabel.text = employee.name;
+    cell.detailTextLabel.text = employee.jobTitle;
+      
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // @todo Create and push a new view configured for the corresponding employee
+  Employee *employee = [self.employees objectAtIndex:indexPath.row];
+  EmployeeViewController *viewController = [[[EmployeeViewController alloc] initWithEmployee:employee] autorelease];
+  
+  NSLog(@"tracer =========");
+  NSLog(@" %@", viewController);
+
+  [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end

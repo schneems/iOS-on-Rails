@@ -54,7 +54,7 @@ enum {
 } EmployeeViewControllerRowIndexes;
 ```
 
-When configuring your cells, you can then use an `if...else if` or `switch` statement to display the information correponding to the given row.
+When configuring your cells, you can then use an `if...else if` or `switch` statement to display the information corresponding to the given row.
 
 ### Step 4
 

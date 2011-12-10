@@ -10,6 +10,7 @@
 
 @interface EmployeeListViewController : UITableViewController
 
-// @todo Create an array property to store the employees
+@property (nonatomic, retain) NSArray *employees;
+
 
 @end
